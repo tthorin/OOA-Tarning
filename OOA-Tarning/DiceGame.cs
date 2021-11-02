@@ -3,7 +3,7 @@
     using System;
     using static Helpers.ConsoleWriteHelper;
 
-    public class DiceGame
+    public partial class DiceGame
     {
         private bool wantToExit = false;
         private int playerPixBalance = 500;
