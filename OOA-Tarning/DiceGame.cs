@@ -9,7 +9,6 @@
         private int playerPixBalance = 500;
         private int computerPixBalance = 500;
         private int bet = 100;
-        private int computerMustPlayUntilAtleast = 19;
         Die die = new();
         public void Run()
         {
@@ -17,6 +16,7 @@
             while (!wantToExit && playerPixBalance >= bet && computerPixBalance >= bet)
             {
                 MainMenu();
+                PlayGame();
             }
             ExitMsg();
 
@@ -27,7 +27,7 @@
             //detta händer när man vill sluta
         }
 
-        private void PlayGame()
+        public void PlayGame()
         {
             PlaceBets();
             int playerTotal = 0;
@@ -35,16 +35,16 @@
             int gameRound = 1;
             bool playerHold = false;
             bool computerStop = false;
-            BorderPrint($"Player has {playerPixBalance} pix, Computer has {computerPixBalance} pix.", false);
+            BorderPrint($"Spelaren har {playerPixBalance} pix, Datorn har {computerPixBalance} pix.", false);
             while (!computerStop)
             {
                 GameRoundPrint(gameRound);
+                if (playerTotal != 0) Console.WriteLine($"Spelarens poäng: {playerTotal} Datorns poäng: {computerTotal}.");
                 if (!playerHold)
                 {
                     (playerTotal, computerTotal, playerHold) = BothRoll(playerTotal, computerTotal);
                 }
                 else if (!computerStop) (computerStop, computerTotal) = ComputerRoll(computerTotal, playerTotal);
-                
                 gameRound++;
             }
             CheckResultAndPrint(playerTotal, computerTotal);
@@ -59,20 +59,20 @@
             if (playerWin)
             {
                 playerPixBalance += 2 * bet;
-                ThinBorderPrint($"Player won! Player now have {playerPixBalance} pix, Computer has {computerPixBalance} pix.");
+                ThinBorderPrint($"Spelaren vann! Spelaren har nu {playerPixBalance}, datorn har: {computerPixBalance}");
             }
             else
             {
                 if (cTotal > pTotal && cTotal <= 21)
                 {
                     computerPixBalance += 2 * bet;
-                    ThinBorderPrint($"Computer won! Player now have {playerPixBalance} pix , Computer has {computerPixBalance} pix.");
+                    ThinBorderPrint($"Datorn vann! Spelaren har nu {playerPixBalance}, datorn har: {computerPixBalance}");
                 }
                 else
                 {
                     playerPixBalance += bet;
                     computerPixBalance += bet;
-                    ThinBorderPrint($"Draw. Player have {playerPixBalance} pix, Computer has {computerPixBalance} pix.");
+                    ThinBorderPrint($"Oavgjort. Spelaren har nu {playerPixBalance}, datorn har: {computerPixBalance}");
                 }
             }
             
@@ -81,29 +81,29 @@
         private (bool computerStop, int computerTotal) ComputerRoll(int cTotal, int pTotal)
         {
             bool cStop = false;
-            if (cTotal > pTotal || (pTotal>21 && cTotal >= computerMustPlayUntilAtleast) || (cTotal>= computerMustPlayUntilAtleast && cTotal==pTotal)) cStop = true;
+            if (cTotal > pTotal || (pTotal>21 && cTotal >= 19)) cStop = true;
             else
             {
-                cTotal += die.RollAndPrint("Computer");
-                Console.WriteLine($"Player have: {pTotal} points, Computer has: {cTotal} points.");
+                cTotal += die.RollAndPrint("Datorn");
+                Console.WriteLine($"Spelaren har {pTotal}, Datorn har: {cTotal}.");
             }
             return (cStop, cTotal);
         }
 
         private (int playerTotal, int computerTotal, bool playerHold) BothRoll(int pTotal, int cTotal)
         {
-            pTotal += die.RollAndPrint("PLayer");
-            if (cTotal < computerMustPlayUntilAtleast) cTotal += die.RollAndPrint("Computer");
+            pTotal += die.RollAndPrint("Spelaren");
+            if (cTotal < 19) cTotal += die.RollAndPrint("Datorn");
             bool playerHold = false;
 
-            Console.WriteLine($"Player have: {pTotal} points, Computer has: {cTotal} points.");
+            Console.WriteLine($"Spelaren har {pTotal}, Datorn har: {cTotal}.");
             if (pTotal >= 21 || cTotal >= 21) playerHold = true;
             else
             {
                 ConsoleKeyInfo input;
                 do
                 {
-                    Console.WriteLine("Would you like to hold at current points or roll again? <H> to hold, <Enter> to roll again.");
+                    Console.WriteLine("Vill du stanna på nuvarande poäng eller slå igen? <S> för att stanna, <Enter> för att slå igen.");
                     input = Console.ReadKey(true);
                 } while (input.Key != ConsoleKey.Enter && input.Key != ConsoleKey.S);
                 if (input.Key == ConsoleKey.S) playerHold = true;
@@ -127,8 +127,8 @@
         {
 
             Console.Clear();
-            Console.WriteLine("\n[1] Spela");
-            Console.WriteLine("[2] Din information");
+            Console.WriteLine("\n[1] Play");
+            Console.WriteLine("[2] Your Pix");
             Console.WriteLine("[3] Exit game");
             string input = Console.ReadLine();
             int.TryParse(input, out int number);
@@ -136,7 +136,7 @@
             while (number < 1 || number > 3)
             {
 
-                Console.Write("Du har valt fel. Välj tjänst nummer igen:");
+                Console.Write("Wrong choice. Try again:");
                 string inputB = Console.ReadLine();
                 int.TryParse(inputB, out number);
             }
