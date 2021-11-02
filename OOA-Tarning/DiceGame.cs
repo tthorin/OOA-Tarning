@@ -119,8 +119,35 @@
             computerPixBalance -= bet;
         }
 
+        public void Details()
+        {
+
+        }
+
         private void MainMenu()
         {
+
+            Console.Clear();
+            Console.WriteLine("\n[1] Spela");
+            Console.WriteLine("[2] Din information");
+            Console.WriteLine("[3] Exit game");
+            string input = Console.ReadLine();
+            int.TryParse(input, out int number);
+
+            while (number < 1 || number > 3)
+            {
+
+                Console.Write("Du har valt fel. Välj tjänst nummer igen:");
+                string inputB = Console.ReadLine();
+                int.TryParse(inputB, out number);
+            }
+
+            switch (number)
+            {
+                case 1: Run(); break;
+                case 2: Details(); break;
+                default: Environment.Exit(0); break;
+            }
             //spelaren får i en meny välja om man vill spela  eller sluta eller ev. annat
             //även info om hur många pix man har just nu
         }
