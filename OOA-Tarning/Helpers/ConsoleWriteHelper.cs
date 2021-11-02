@@ -75,7 +75,7 @@ namespace OOA_Tarning.Helpers
         {
             //┌┐└┘─┤├
             Console.WriteLine($"           ┌────────┐");
-            Console.WriteLine($"───────────┤Round{round,3}├───────────────────────────────────────────────────");
+            Console.WriteLine($"───────────┤Runda{round,3}├───────────────────────────────────────────────────");
             Console.WriteLine($"           └────────┘");
         }
         internal static void InvertColors()
