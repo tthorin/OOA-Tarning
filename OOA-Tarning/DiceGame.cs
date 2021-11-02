@@ -17,7 +17,6 @@
             while (!wantToExit && playerPixBalance >= bet && computerPixBalance >= bet)
             {
                 MainMenu();
-                PlayGame();
             }
             ExitMsg();
 
