@@ -62,14 +62,17 @@ namespace OOA_Tarning.Helpers
                 Console.ReadKey(true);
             }
         }
-        internal static void ThinBorderPrint(string msg)
+        internal static void ThinBorderPrint(string msg, bool holdAtEnd = true)
         {
             //┌┐┘└│─
             Console.WriteLine($"┌{new string('─', msg.Length + 2)}┐");
             Console.WriteLine($"│ {msg} │");
             Console.WriteLine($"└{new string('─', msg.Length + 2)}┘");
-            Console.WriteLine("Press any key to continue.");
-            Console.ReadKey(true);
+            if (holdAtEnd)
+            {
+                Console.WriteLine("Press any key to continue.");
+                Console.ReadKey(true);
+            }
         }
         internal static void GameRoundPrint(int round)
         {

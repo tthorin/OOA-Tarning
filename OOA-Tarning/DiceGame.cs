@@ -16,7 +16,6 @@
             while (!wantToExit && playerPixBalance >= bet && computerPixBalance >= bet)
             {
                 MainMenu();
-                PlayGame();
             }
             ExitMsg();
 
@@ -125,30 +124,50 @@
 
         private void MainMenu()
         {
-
             Console.Clear();
-            Console.WriteLine("\n[1] Play");
-            Console.WriteLine("[2] Your Pix");
-            Console.WriteLine("[3] Exit game");
-            string input = Console.ReadLine();
-            int.TryParse(input, out int number);
+            Console.WriteLine($"You have {playerPixBalance} pix, the computer has {computerPixBalance} pix.");
+            Console.WriteLine($"Current bet is {bet} pix.");
+            Console.WriteLine("\n[1] Play.");
+            Console.WriteLine("[2] Change bet.");
+            Console.WriteLine("[3] Exit game.");
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine("Press a number key to select something.");
+            //string input = Console.ReadLine();
+            //int.TryParse(input, out int number);
 
-            while (number < 1 || number > 3)
+            //while (number < 1 || number > 3)
+            //{
+
+            //    Console.Write("Wrong choice. Try again:");
+            //    string inputB = Console.ReadLine();
+            //    int.TryParse(inputB, out number);
+            //}
+            ConsoleKeyInfo input = Console.ReadKey(true);
+
+            switch (input.Key)
             {
-
-                Console.Write("Wrong choice. Try again:");
-                string inputB = Console.ReadLine();
-                int.TryParse(inputB, out number);
-            }
-
-            switch (number)
-            {
-                case 1: PlayGame(); break;
-                case 2: Details(); break;
-                default: wantToExit=true; break;
+                case ConsoleKey.D1 or ConsoleKey.NumPad1: PlayGame(); break;
+                case ConsoleKey.D2 or ConsoleKey.NumPad2: ChangeBet(); break;
+                case ConsoleKey.D3 or ConsoleKey.NumPad3 or ConsoleKey.Escape: wantToExit = true; break;
+                default: break;
             }
             //spelaren får i en meny välja om man vill spela  eller sluta eller ev. annat
             //även info om hur många pix man har just nu
+        }
+
+        private void ChangeBet()
+        {
+            Console.Clear();
+            ThinBorderPrint($"Current bet is: {bet} pix, you have {playerPixBalance} pix and the computer has {computerPixBalance} pix.",false);
+            Console.WriteLine("New bet must be over 0 and cannot be over either yours or the computers current pix balance.");
+            Console.Write("New bet: ");
+            int.TryParse(Console.ReadLine(), out int number);
+            while (number <=0 || number>playerPixBalance ||number>computerPixBalance)
+            {
+                Console.Write("Invalid amount. New bet: ");
+                int.TryParse(Console.ReadLine(), out number);
+            }
+            bet = number;
         }
 
         private void Intro()
