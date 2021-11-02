@@ -7,7 +7,7 @@
         static void Main()
         {
             DiceGame game = new();
-            game.PlayGame();
+            game.Run();
         }
     }
 }

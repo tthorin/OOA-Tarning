@@ -27,7 +27,7 @@
             //detta händer när man vill sluta
         }
 
-        public void PlayGame()
+        private void PlayGame()
         {
             PlaceBets();
             int playerTotal = 0;
@@ -118,7 +118,7 @@
             computerPixBalance -= bet;
         }
 
-        public void Details()
+        private void Details()
         {
             Console.WriteLine($"You have [{playerPixBalance}] pix");
         }
