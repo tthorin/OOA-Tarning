@@ -45,6 +45,7 @@
                     (playerTotal, computerTotal, playerHold) = BothRoll(playerTotal, computerTotal);
                 }
                 else if (!computerStop) (computerStop, computerTotal) = ComputerRoll(computerTotal, playerTotal);
+                gameRound++;
             }
             CheckResultAndPrint(playerTotal, computerTotal);
         }
