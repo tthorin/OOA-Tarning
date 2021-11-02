@@ -143,9 +143,9 @@
 
             switch (number)
             {
-                case 1: Run(); break;
+                case 1: PlayGame(); break;
                 case 2: Details(); break;
-                default: Environment.Exit(0); break;
+                default: wantToExit=true; break;
             }
             //spelaren får i en meny välja om man vill spela  eller sluta eller ev. annat
             //även info om hur många pix man har just nu
