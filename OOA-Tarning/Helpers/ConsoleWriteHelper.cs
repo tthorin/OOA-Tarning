@@ -15,7 +15,7 @@ namespace OOA_Tarning.Helpers
             for (var i = 0; i < 5; i++)
             {
                 Console.Write(".");
-                Thread.Sleep(200);
+                Thread.Sleep(70);
             }
             Console.WriteLine();
         }
@@ -78,7 +78,7 @@ namespace OOA_Tarning.Helpers
         {
             //┌┐└┘─┤├
             Console.WriteLine($"           ┌────────┐");
-            Console.WriteLine($"───────────┤Runda{round,3}├───────────────────────────────────────────────────");
+            Console.WriteLine($"───────────┤Round{round,3}├───────────────────────────────────────────────────");
             Console.WriteLine($"           └────────┘");
         }
         internal static void InvertColors()
