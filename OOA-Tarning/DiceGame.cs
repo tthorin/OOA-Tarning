@@ -28,7 +28,7 @@
             //detta händer när man vill sluta
         }
 
-        public void PlayGame()
+        private void PlayGame()
         {
             PlaceBets();
             int playerTotal = 0;
