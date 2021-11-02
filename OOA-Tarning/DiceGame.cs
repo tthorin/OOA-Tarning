@@ -120,7 +120,7 @@
 
         public void Details()
         {
-
+            Console.WriteLine($"Du har [{playerPixBalance}] pix");
         }
 
         private void MainMenu()
