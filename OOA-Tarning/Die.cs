@@ -18,7 +18,7 @@
         public int RollAndPrint(string whoIsRolling)
         {
             int dieRoll = rng.Next(1, sides + 1);
-            DramaticPrint($"{whoIsRolling} slår en {dieRoll}:a.");
+            DramaticPrint($"{whoIsRolling} rolls a {dieRoll}");
             return dieRoll;
         }
     }
