@@ -9,6 +9,7 @@
         private int playerPixBalance = 500;
         private int computerPixBalance = 500;
         private int bet = 100;
+        int computerMustPlayUntilAtleast = 19;
         Die die = new();
         public void Run()
         {
@@ -39,12 +40,12 @@
             while (!computerStop)
             {
                 GameRoundPrint(gameRound);
-                if (playerTotal != 0) Console.WriteLine($"Spelarens poäng: {playerTotal} Datorns poäng: {computerTotal}.");
                 if (!playerHold)
                 {
                     (playerTotal, computerTotal, playerHold) = BothRoll(playerTotal, computerTotal);
                 }
                 else if (!computerStop) (computerStop, computerTotal) = ComputerRoll(computerTotal, playerTotal);
+                
                 gameRound++;
             }
             CheckResultAndPrint(playerTotal, computerTotal);
@@ -81,7 +82,7 @@
         private (bool computerStop, int computerTotal) ComputerRoll(int cTotal, int pTotal)
         {
             bool cStop = false;
-            if (cTotal > pTotal || (pTotal>21 && cTotal >= 19)) cStop = true;
+            if (cTotal > pTotal || (pTotal>21 && cTotal >= computerMustPlayUntilAtleast) || (cTotal>= computerMustPlayUntilAtleast && cTotal==pTotal)) cStop = true;
             else
             {
                 cTotal += die.RollAndPrint("Datorn");
@@ -93,7 +94,7 @@
         private (int playerTotal, int computerTotal, bool playerHold) BothRoll(int pTotal, int cTotal)
         {
             pTotal += die.RollAndPrint("Spelaren");
-            if (cTotal < 19) cTotal += die.RollAndPrint("Datorn");
+            if (cTotal < computerMustPlayUntilAtleast) cTotal += die.RollAndPrint("Datorn");
             bool playerHold = false;
 
             Console.WriteLine($"Spelaren har {pTotal}, Datorn har: {cTotal}.");
