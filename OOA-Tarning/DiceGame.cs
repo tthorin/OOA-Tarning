@@ -87,7 +87,7 @@
             if (cTotal > pTotal || pTotal >= 21 || cTotal >= computerMustPlayUntilAtleast) cStop = true;
             else
             {
-                cTotal += die.RollAndPrint("Computer");
+                cTotal += die.PrintDice("Computer");
                 ThinBorderPrint($"Player have: {pTotal} points, Computer has: {cTotal} points.", false);
             }
             return (cStop, cTotal);
@@ -95,8 +95,8 @@
 
         private (int playerTotal, int computerTotal, bool playerHold) PlayerRoll(int pTotal, int cTotal)
         {
-            pTotal += die.RollAndPrint("Player");
-            if (cTotal < computerMustPlayUntilAtleast) cTotal += die.RollAndPrint("Computer");
+            pTotal += die.PrintDice("Player");
+            if (cTotal < computerMustPlayUntilAtleast) cTotal += die.PrintDice("Computer");
             bool playerHold = false;
 
             ThinBorderPrint($"Player have: {pTotal} points, Computer has: {cTotal} points.", false);
