@@ -11,16 +11,6 @@
             this.sides = sides;
         }
 
-        public int Roll()
-        {
-            return rng.Next(1, sides + 1);
-        }
-        public int RollAndPrint(string whoIsRolling)
-        {
-            int dieRoll = rng.Next(1, sides + 1);
-            DramaticPrint($"{whoIsRolling} rolls a {dieRoll}");
-            return dieRoll;
-        }
         public int PrintDice(string whoIsRolling)
         {   
             int diceResult = rng.Next(1, sides + 1);
