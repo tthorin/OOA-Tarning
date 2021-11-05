@@ -19,6 +19,17 @@ namespace OOA_Tarning.Helpers
             }
             Console.WriteLine();
         }
+        internal static void PausePrintDots((int X,int Y)move,(int X,int Y)back)
+        {
+            Console.CursorVisible = false;
+            Console.SetCursorPosition(move.X, move.Y);
+            for (var i = 0; i < 5; i++)
+            {
+                Console.Write(".");
+                Thread.Sleep(100);
+            }
+            Console.SetCursorPosition(back.X, back.Y);
+        }
         internal static void PrintAndHold(string msg)
         {
             Console.WriteLine(msg);

@@ -14,22 +14,30 @@
         public int PrintDice(string whoIsRolling)
         {   
             int diceResult = rng.Next(1, sides + 1);
+            int space = 21;
+            string whoRolled = $"{whoIsRolling} rolls:";
 
-            Console.WriteLine("".PadRight(20) + "┌─────┐");
+            Console.WriteLine("".PadRight(space) + "┌─────┐");
 
-            if (diceResult == 1) Console.WriteLine("".PadRight(20) + "│     │");
-            else if (diceResult == 2 || diceResult == 3) Console.WriteLine("".PadRight(20) + "│o    │");
-            else Console.WriteLine("".PadRight(20) + "│o   o│");
+            if (diceResult == 1) Console.WriteLine("".PadRight(space) + "│     │");
+            else if (diceResult == 2 || diceResult == 3) Console.WriteLine("".PadRight(space) + "│o    │");
+            else Console.WriteLine("".PadRight(space) + "│o   o│");
 
-            if (diceResult == 4 || diceResult == 2) Console.WriteLine($"{whoIsRolling} rolls:".PadRight(20) + "│     │");
-            else if (diceResult == 6) Console.WriteLine($"{whoIsRolling} rolls:".PadRight(20) + "│o   o│");
-            else Console.WriteLine($"{whoIsRolling} rolls:".PadRight(20) + "│  o  │");
+            Console.Write(whoRolled);
+            (int X, int Y) firstPos = Console.GetCursorPosition();
+            Console.Write("".PadRight(space-whoRolled.Length));
+            if (diceResult == 4 || diceResult == 2) Console.WriteLine("│     │");
+            else if (diceResult == 6) Console.WriteLine("│o   o│");
+            else Console.WriteLine("│  o  │");
 
-            if (diceResult == 3 || diceResult == 2) Console.WriteLine("".PadRight(20) + "│    o│");
-            else if (diceResult == 1) Console.WriteLine("".PadRight(20) + "│     │");
-            else Console.WriteLine("".PadRight(20) + "│o   o│");
+            if (diceResult == 3 || diceResult == 2) Console.WriteLine("".PadRight(space) + "│    o│");
+            else if (diceResult == 1) Console.WriteLine("".PadRight(space) + "│     │");
+            else Console.WriteLine("".PadRight(space) + "│o   o│");
 
-            Console.WriteLine("".PadRight(20) + "└─────┘");
+            Console.WriteLine("".PadRight(space) + "└─────┘");
+            (int X, int Y) finsihPos = Console.GetCursorPosition();
+
+            PausePrintDots(firstPos, finsihPos);
 
             return diceResult;
         }
