@@ -24,7 +24,6 @@
         public int PrintDice(string whoIsRolling)
         {   
             int diceHeight = 5;
-            int diceWidth = 7;
             int diceResult = rng.Next(1, sides + 1);
 
             for (int diceRow = 0; diceRow < diceHeight; diceRow++)
